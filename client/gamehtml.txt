@@ -1,0 +1,36 @@
+<head>
+  <title>Game</title>
+</head>
+
+<body>
+   {{> main}}
+</body>
+
+
+<template name="main">
+<!--   <div class="ionHeaderBar">
+    <div class="{{classes}}">
+      {{> UI.contentBlock}}
+    </div>
+  </div> -->
+
+{{> header}}
+{{> swiper}}
+  <div class="wrapper">
+    {{>swipe Swiper=Swiper}}
+  </div>
+
+</template>
+
+<template name="swiper">
+
+  <div class="wrapper">
+    {{>swipe Swiper=Swiper}}
+  </div>
+
+</template>
+
+<template name="header">
+<div align="center">Triples</div>
+
+</template>

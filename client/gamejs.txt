@@ -1,0 +1,40 @@
+function makeSwipe() {
+  console.log("in ****  " + Session.get('gamelevel'));
+  var array = [];
+  for (var i = 1;i <= Session.get('gamelevel'); i++) {
+    array.push('screen'+i)
+  };
+  Swiper = new Swipe(array);
+
+}
+makeSwipe();
+
+
+Template.swiper.helpers({
+  Swiper: function() {
+    return Swiper;
+  }
+});
+
+Template.swiper.rendered = function() {
+  Swiper.setInitialPage('screen1');
+  Tracker.autorun(function() {
+    console.log("Session.get('gamelevel') - " + Session.get('gamelevel'));
+    if(Session.get('gamelevel')==1){
+      return Swiper.leftRight(null, null);
+    }
+    for (var i = 1; i <= Session.get('gamelevel'); i++) {
+      if (Swiper.pageIs('screen' + (i))) {
+        if (i == 1) {
+          return Swiper.leftRight(null, 'screen' + (i + 1));
+        };
+        if ((i) >= Session.get('gamelevel')) {
+          return Swiper.leftRight('screen' + (i - 1), null);
+        };
+        if (i < Session.get('gamelevel') && i != 1) {
+          return Swiper.leftRight('screen' + (i - 1), 'screen' + (i + 1));
+        };
+      }
+    };
+  });
+};
